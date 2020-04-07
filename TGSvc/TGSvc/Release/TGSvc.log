@@ -1,0 +1,10 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(368,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+cl : 命令行 warning D9025: 正在重写“/sdl”(用“/GS-”)
+  sys.cpp
+..\..\..\..\TGLibrary\sysLib\sys.cpp(35): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _stricmp. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\string.h(568): note: 参见“stricmp”的声明
+..\..\..\..\TGLibrary\sysLib\sys.cpp(110): warning C4996: 'GetVersionExA': 被声明为已否决
+  C:\Program Files (x86)\Windows Kits\8.1\Include\um\sysinfoapi.h(433): note: 参见“GetVersionExA”的声明
+  LINK : 已指定 /LTCG，但不需要生成代码；从链接命令行中移除 /LTCG 以提高链接器性能
+  TGSvc.vcxproj -> C:\Users\Liang\Desktop\TianGou\client\exe\TGSvc\TGSvc\..\..\..\bin\TGSvc.exe
+  TGSvc.vcxproj -> ..\..\..\bin\TGSvc.pdb (Full PDB)
