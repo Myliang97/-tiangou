@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3C2A555D-DD60-4FE4-82C9-0E8BE1909220}</ProjectGuid>
+    <RootNamespace>TermApp</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="PropertySheet.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\..\bin</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\..\..\TGLibrary;..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);WIN32_LEAN_AND_MEAN</PreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <UACExecutionLevel>AsInvoker</UACExecutionLevel>
+      <AdditionalLibraryDirectories>..\..\..\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>NotSet</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\TGLibrary\curl\CURLClient.cpp" />
+    <ClCompile Include="..\..\..\..\TGLibrary\curl\Request.cpp" />
+    <ClCompile Include="..\..\..\..\TGLibrary\file\FileLib.cpp" />
+    <ClCompile Include="..\..\..\..\TGLibrary\log\Logger.cpp" />
+    <ClCompile Include="..\..\..\..\TGLibrary\md5\MD5.cpp" />
+    <ClCompile Include="..\..\..\..\TGLibrary\net\TcpClient.cpp" />
+    <ClCompile Include="..\..\..\..\TGLibrary\pipe\PipeClient.cpp" />
+    <ClCompile Include="..\..\..\..\TGLibrary\pipe\PipeServer.cpp" />
+    <ClCompile Include="..\..\..\..\TGLibrary\register\RegLib.cpp" />
+    <ClCompile Include="..\..\..\..\TGLibrary\sysLib\sys.cpp" />
+    <ClCompile Include="..\..\..\..\TGLibrary\tcp\TcpServer.cpp" />
+    <ClCompile Include="..\..\..\..\TGLibrary\xml\tinystr.cpp" />
+    <ClCompile Include="..\..\..\..\TGLibrary\xml\tinyxml.cpp" />
+    <ClCompile Include="..\..\..\..\TGLibrary\xml\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\..\..\TGLibrary\xml\tinyxmlparser.cpp" />
+    <ClCompile Include="..\..\..\..\TGLibrary\xml\XmlReader.cpp" />
+    <ClCompile Include="FileParser.cpp" />
+    <ClCompile Include="InitHook.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MatchRule.cpp" />
+    <ClCompile Include="RequestQueue.cpp" />
+    <ClCompile Include="SensitiveCheck.cpp" />
+    <ClCompile Include="TermApp.cpp" />
+    <ClCompile Include="TermInfo.cpp" />
+    <ClCompile Include="TGConfig.cpp" />
+    <ClCompile Include="TGLogin.cpp" />
+    <ClCompile Include="TGTip.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\curl.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\CURLClient.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\curlver.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\easy.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\mprintf.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\multi.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\Request.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\stdcheaders.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\system.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\typecheck-gcc.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\urlapi.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\file\FileLib.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\log\Logger.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\md5\MD5.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\net\TcpClient.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\pipe\PipeClient.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\pipe\PipeServer.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\register\RegLib.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\sysLib\sys.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\tcp\TcpServer.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\xml\tinystr.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\xml\tinyxml.h" />
+    <ClInclude Include="..\..\..\..\TGLibrary\xml\XmlReader.h" />
+    <ClInclude Include="FileParser.h" />
+    <ClInclude Include="InitHook.h" />
+    <ClInclude Include="MatchRule.h" />
+    <ClInclude Include="RequestQueue.h" />
+    <ClInclude Include="SensitiveCheck.h" />
+    <ClInclude Include="TermApp.h" />
+    <ClInclude Include="TermInfo.h" />
+    <ClInclude Include="TGConfig.h" />
+    <ClInclude Include="TGLogin.h" />
+    <ClInclude Include="TGTip.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

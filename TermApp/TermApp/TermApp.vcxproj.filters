@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Pipe">
+      <UniqueIdentifier>{e7cb2f8f-90f2-4d6f-891a-c3a00f5981e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sysLib">
+      <UniqueIdentifier>{2015508c-465a-420a-a4b0-3505ff1ffd4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="register">
+      <UniqueIdentifier>{8661266a-845c-4043-ba82-e7b8733463b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="md5">
+      <UniqueIdentifier>{315b5386-9189-4a66-9974-234f3157d29a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="log">
+      <UniqueIdentifier>{35c60232-4df2-402e-bfe4-4f304b855140}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="xml">
+      <UniqueIdentifier>{b8f8e1f1-5cfe-4e5c-98a8-b204330fbeb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tcp">
+      <UniqueIdentifier>{19607867-2766-400b-8e07-46110bba103c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="curl">
+      <UniqueIdentifier>{f3fa7d46-ddb4-43cb-bd5c-9b3bac68f286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="fileLib">
+      <UniqueIdentifier>{737dd5fb-3306-46d8-a746-c3aa8a1fdb19}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TermApp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InitHook.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TermInfo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TGConfig.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TGLogin.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TGLibrary\md5\MD5.cpp">
+      <Filter>md5</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TGLibrary\pipe\PipeClient.cpp">
+      <Filter>Pipe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TGLibrary\register\RegLib.cpp">
+      <Filter>register</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TGLibrary\sysLib\sys.cpp">
+      <Filter>sysLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TGLibrary\log\Logger.cpp">
+      <Filter>log</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TGLibrary\pipe\PipeServer.cpp">
+      <Filter>Pipe</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TGLibrary\net\TcpClient.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SensitiveCheck.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TGLibrary\xml\tinystr.cpp">
+      <Filter>xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TGLibrary\xml\tinyxml.cpp">
+      <Filter>xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TGLibrary\xml\tinyxmlerror.cpp">
+      <Filter>xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TGLibrary\xml\tinyxmlparser.cpp">
+      <Filter>xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TGLibrary\xml\XmlReader.cpp">
+      <Filter>xml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TGLibrary\tcp\TcpServer.cpp">
+      <Filter>tcp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TGLibrary\curl\CURLClient.cpp">
+      <Filter>curl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TGLibrary\file\FileLib.cpp">
+      <Filter>fileLib</Filter>
+    </ClCompile>
+    <ClCompile Include="RequestQueue.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\TGLibrary\curl\Request.cpp">
+      <Filter>curl</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchRule.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FileParser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TGTip.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TermApp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InitHook.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TermInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TGConfig.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TGLogin.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\md5\MD5.h">
+      <Filter>md5</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\pipe\PipeClient.h">
+      <Filter>Pipe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\register\RegLib.h">
+      <Filter>register</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\sysLib\sys.h">
+      <Filter>sysLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\log\Logger.h">
+      <Filter>log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\pipe\PipeServer.h">
+      <Filter>Pipe</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\net\TcpClient.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SensitiveCheck.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\xml\tinystr.h">
+      <Filter>xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\xml\tinyxml.h">
+      <Filter>xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\xml\XmlReader.h">
+      <Filter>xml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\tcp\TcpServer.h">
+      <Filter>tcp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\curl.h">
+      <Filter>curl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\CURLClient.h">
+      <Filter>curl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\curlver.h">
+      <Filter>curl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\easy.h">
+      <Filter>curl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\mprintf.h">
+      <Filter>curl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\multi.h">
+      <Filter>curl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\stdcheaders.h">
+      <Filter>curl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\system.h">
+      <Filter>curl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\typecheck-gcc.h">
+      <Filter>curl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\urlapi.h">
+      <Filter>curl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\file\FileLib.h">
+      <Filter>fileLib</Filter>
+    </ClInclude>
+    <ClInclude Include="RequestQueue.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\TGLibrary\curl\Request.h">
+      <Filter>curl</Filter>
+    </ClInclude>
+    <ClInclude Include="MatchRule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FileParser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TGTip.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
