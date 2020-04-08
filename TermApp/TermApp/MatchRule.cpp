@@ -40,7 +40,7 @@ void MatchRule::AddMacthRule(MatchRule &rule)
 	int start = 0;
 	while ((pos = ruleName.find(L';',start)) && (pos != std::wstring::npos))
 	{
-		std::wstring dat = ruleName.substr(start, pos);
+		std::wstring dat = ruleName.substr(start, pos -start);
 		AddMacthRuleName(dat);
 		start = pos + 1;
 	}
@@ -49,7 +49,7 @@ void MatchRule::AddMacthRule(MatchRule &rule)
 	start = 0;
 	while ((pos = info.find(L';',start)) && (pos !=std::wstring::npos))
 	{
-		std::wstring dat = info.substr(start, pos);
+		std::wstring dat = info.substr(start, pos -start);
 		AddMacthInfo(dat);
 		start = pos + 1;
 	}
