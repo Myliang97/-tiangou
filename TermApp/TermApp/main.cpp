@@ -6,16 +6,28 @@
 #include<sysLib/sys.h>
 #include<register/RegLib.h>
 #include<windows.h>
+#include<stringLib/strLib.hpp>
+#include<shellapi.h>
+#include<QApplication>
+#include "TGTip.h"
 
 DWORD curProcId = 0;
-
-bool InitTipWindow()
-{
-	return true;
-}
-
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
+	int argc = 0;
+	LPWSTR *argvW = CommandLineToArgvW(GetCommandLineW(), &argc);
+	char **argv = new char *[argc];
+	for (int i = 0; i < argc; ++i)
+	{
+		argv[i] = StrLib::UnicodeToUtf8(argvW[i]);
+	}
+	QApplication a(argc, argv);
+	a.setQuitOnLastWindowClosed(false);
+	for (int i = 0; i < argc; ++i)
+	{
+		delete[]argv[i];
+	}
+	delete[]argv;
 	curProcId = GetCurrentProcessId();
 	if (!IsKeyExists(HKEY_CURRENT_USER, TG_REG_ROOT_PATH))
 	{
@@ -36,12 +48,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	{
 		if (app->Start())
 		{
-			MSG msg;
-			while (GetMessage(&msg, NULL, 0, 0)) //从消息队列中取出消息
-			{
-				TranslateMessage(&msg); //转化消息
-				DispatchMessage(&msg);  //分发消息
-			}
+			return a.exec();
 		}
 	}
 	return -1;

@@ -82,6 +82,7 @@ BOOL TermApp::Init()  //初始化TermApp
 		return FALSE;
 	}
 	m_tcpHookServer->Start();
+	m_tip = new TGTip;
 	return TRUE;
 }
 
@@ -171,12 +172,9 @@ DWORD WINAPI TermApp::ListenTcpProc(LPVOID lParameter)
 		wmemset(buffer, 0, wLen);
 		TcpServer::ReadFromSock(sock, buffer, msg.dataLength);
 	}
-	else
-	{
-		HOOK_MESSAGE_RET ret;
-		memset(&ret, 0, sizeof(HOOK_MESSAGE_RET));
-		TcpServer::WriteToSock(sock, &ret, sizeof(HOOK_MESSAGE_RET));
-	}
+
+	HOOK_MESSAGE_RET ret;
+	memset(&ret, 0, sizeof(HOOK_MESSAGE_RET));
 	if (msg.hookType == HOOK_TYPE::HOOK_TYPE_OPEN_FILE || msg.hookType == HOOK_TYPE::HOOK_TYPE_DELETE_FILE) 
 	{
 		MatchRule rule;
@@ -184,11 +182,14 @@ DWORD WINAPI TermApp::ListenTcpProc(LPVOID lParameter)
 		{
 			TermApp::Instance()->GetLogger()->TraceW(INFO_FORMAT, L"file:%s -- is Sensitived", msg.wzlpFileName);
 			app->m_reqQueProc->AddRequest(msg.hookType, msg.wzlpFileName, msg.processName,&rule,NULL,1);
+			app->m_tip->AddStr(msg.wzlpFileName,(int)msg.hookType);
 		}
+		TcpServer::WriteToSock(sock, &ret, sizeof(HOOK_MESSAGE_RET));
 		
 	}
 	else if (msg.hookType == HOOK_TYPE::HOOK_TYPE_COPY_FILE || msg.hookType == HOOK_TYPE::HOOK_TYPE_MOVE_FILE || msg.hookType == HOOK_TYPE_RENAME_FILE)
 	{
+		TcpServer::WriteToSock(sock, &ret, sizeof(HOOK_MESSAGE_RET));
 		MatchRule rule;
 		if (IsSecretFileW(msg.wzlparameter,rule))
 		{
@@ -198,8 +199,6 @@ DWORD WINAPI TermApp::ListenTcpProc(LPVOID lParameter)
 	}
 	else if (msg.hookType == HOOK_TYPE::HOOK_TYPE_PRINT_DATA) //敏感数据打印
 	{
-		HOOK_MESSAGE_RET ret;
-		memset(&ret, 0, sizeof(HOOK_MESSAGE_RET));
 		if (buffer)
 		{
 			MatchRule rule;

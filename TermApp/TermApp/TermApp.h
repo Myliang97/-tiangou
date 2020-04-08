@@ -8,6 +8,7 @@
 #include "TGLogin.h"
 #include<tcp/TcpServer.h>
 #include "RequestQueue.h"
+#include "TGTip.h"
 class TermApp
 {
 public:
@@ -40,5 +41,6 @@ private:
 	TcpServer *m_tcpHookServer;
 	RequestQueue *m_reqQueProc;
 	std::string m_url;
+	TGTip *m_tip;
 };
 
