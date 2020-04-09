@@ -207,7 +207,8 @@ DWORD WINAPI TermApp::ListenTcpProc(LPVOID lParameter)
 			delete[]buffer;
 			buffer = NULL;
 			ret.nExtern = isSensitive ?1:0;
-			TermApp::Instance()->GetLogger()->TraceW(INFO_FORMAT, L"print sensitive data");
+			if(isSensitive)
+				TermApp::Instance()->GetLogger()->TraceW(INFO_FORMAT, L"print sensitive data");
 		}
 		TcpServer::WriteToSock(sock, &ret, sizeof(HOOK_MESSAGE_RET));
 	}
@@ -222,6 +223,7 @@ TermApp::TermApp()
 	m_stopPipe = NULL;
 	m_tcpHookServer = NULL;
 	m_reqQueProc = NULL;
+	m_tip = NULL;
 }
 
 
@@ -261,5 +263,10 @@ TermApp::~TermApp()
 	{
 		delete m_reqQueProc;
 		m_reqQueProc = NULL;
+	}
+	if (m_tip)
+	{
+		delete m_tip;
+		m_tip = NULL;
 	}
 }
