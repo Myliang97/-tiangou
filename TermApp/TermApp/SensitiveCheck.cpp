@@ -201,6 +201,7 @@ void CheckDataMatchRule(const wchar_t* wdata, MatchRule &rule, BOOL &isSensitive
 	for (std::vector<ScanFileRule>::iterator begin = ruleList.begin();begin !=ruleList.end();++begin)
 	{
 		MatchRule oneRule;
+		bool isMatch = false;
 		//Æ¥Åä¹Ø¼ü´Ê
 		vector<KeyWordAttribute>keywordList = begin->m_keywords;
 		for (int i=0;i<keywordList.size();++i)
@@ -213,7 +214,7 @@ void CheckDataMatchRule(const wchar_t* wdata, MatchRule &rule, BOOL &isSensitive
 			RegexSearch(text, reg, num);
 			if (num >= keywordList[i].num) {
 				oneRule.AddMacthInfo(keywordList[i].m_keyword);
-				isSensitive = true;
+				isMatch = true;
 			}
 		}
 		vector<RegexAttribute>regexList = begin->m_regexs;
@@ -227,12 +228,13 @@ void CheckDataMatchRule(const wchar_t* wdata, MatchRule &rule, BOOL &isSensitive
 			RegexSearch(text, reg, num);
 			if (num>=regexList[i].num){
 				oneRule.AddMacthInfo(regexList[i].m_regex);
-				isSensitive = true;
+				isMatch = true;
 			}
 		}
-		if (isSensitive) {
+		if (isMatch) {
 			oneRule.AddMacthRuleName(begin->m_ruleName);
 			rule.AddMacthRule(oneRule);
+			isSensitive = TRUE;
 		}
 	}
 }
