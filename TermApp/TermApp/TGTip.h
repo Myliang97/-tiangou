@@ -11,7 +11,7 @@ class TGTip :public QDialog
 {
 	Q_OBJECT
 public:
-	void AddStr(std::wstring,int);
+	void AddStr(int type,std::wstring wstr =L"");
 	explicit TGTip(QWidget *parent = 0);
 	~TGTip();
 signals:

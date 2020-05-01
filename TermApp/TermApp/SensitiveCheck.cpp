@@ -258,9 +258,14 @@ void RegexSearch(std::wstring &text, std::wregex &reg, int &num)
 	wstring::const_iterator start = text.begin();
 	wstring::const_iterator end = text.end();
 	num = 0;
-	while (regex_search(start, end, res,reg))
-	{
-		num++;
-		start = res[0].second;
+	try {
+		while (regex_search(start, end, res, reg))
+		{
+			num++;
+			start = res[0].second;
+		}
+	}
+	catch (...) {
+		num = 0;
 	}
 }

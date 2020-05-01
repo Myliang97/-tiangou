@@ -40,6 +40,12 @@
     <Filter Include="fileLib">
       <UniqueIdentifier>{737dd5fb-3306-46d8-a746-c3aa8a1fdb19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{17029774-ace8-4a2f-967d-9d42c9e74033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GeneratedFiles">
+      <UniqueIdentifier>{6b9c90a0-eb95-4e77-a1a6-072c26055de7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -77,9 +83,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\TGLibrary\pipe\PipeServer.cpp">
       <Filter>Pipe</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\TGLibrary\net\TcpClient.cpp">
-      <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="SensitiveCheck.cpp">
       <Filter>源文件</Filter>
@@ -123,6 +126,9 @@
     <ClCompile Include="TGTip.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\moc_TGTip.cpp">
+      <Filter>GeneratedFiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TermApp.h">
@@ -157,9 +163,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\TGLibrary\pipe\PipeServer.h">
       <Filter>Pipe</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\TGLibrary\net\TcpClient.h">
-      <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="SensitiveCheck.h">
       <Filter>头文件</Filter>
@@ -221,8 +224,16 @@
     <ClInclude Include="FileParser.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TGTip.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="GeneratedFiles\ui_tip.h">
+      <Filter>GeneratedFiles</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="tip.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TGTip.h">
+      <Filter>头文件</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

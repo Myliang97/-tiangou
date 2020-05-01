@@ -1,4 +1,4 @@
-#include "FileParser.h"
+﻿#include "FileParser.h"
 #include<tgarchive.h>
 #include<pstParser.h>
 #include<file/FileLib.h>
@@ -8,18 +8,100 @@
 #define TGARCHIVE_DLL "tgarchive.dll"
 #define PSTPARSER_DLL "pstParser.dll"
 
+/*
+	ANSI                              无格式定义                         对于中文编码格式是GB2312;
+	Unicode                         文本里前两个字节为FF FE              字节流是little endian
+	Unicode  big endian      文本里前两个字节为FE FF               字节流是big  endian
+	UTF-8                            前两字节为EF BB，第三字节为BF     带bom
+*/
+FileCodingType FileParser::GetFileCoding(const wchar_t *wfilename)
+{
+	unsigned char  s2;
+	char *filename = StrLib::UnicodeToUtf8(wfilename);
+	std::ifstream fin(filename);
+	fin.read((char*)&s2, sizeof(s2));
+	int p = s2 << 8;
+	fin.read((char*)&s2, sizeof(s2));
+	p += s2;
+
+	FileCodingType res;
+	switch (p)//判断文本前两个字节
+	{
+	case 0xfffe:  //65534
+	case 0xfeff://65279
+		res = FileCodingType::Unicode;
+		break;
+	case 0xefbb://61371
+		res = FileCodingType::Utf_8;
+		break;
+	default:
+		res = FileCodingType::Multi_Byte;
+	}
+	return res;
+}
+
 bool FileParser::ParserTextFile(const wchar_t *wfileName, std::wstring &wdata)
 {
 	if (!wfileName)return false;
-	std::wifstream file(wfileName);
-	if (!file.is_open())return false;
-	std::wstring line;
-	wdata.clear();
-	while (getline(file,line))
+	FileCodingType coding = GetFileCoding(wfileName);
+	switch (coding)
 	{
-		wdata.append(line);
+	case Multi_Byte:
+	{
+		char *filename = StrLib::UnicodeToMultiByte(wfileName);
+		if (!wfileName)return false;
+		std::ifstream file(filename);
+		delete[]filename;
+		std::string line;
+		std::string data;
+		while (getline(file, line))
+		{
+			data.append(line);
+		}
+		wchar_t * buffer = StrLib::MultiByteToUnicode(data.c_str());
+		if (buffer) {
+			wdata = buffer;
+			delete[]buffer;
+			return true;
+		}
 	}
-	return true;
+	break;
+	case Utf_8:
+	{
+		char *filename = StrLib::UnicodeToUtf8(wfileName);
+		if (!wfileName)return false;
+		std::ifstream file(filename);
+		delete[]filename;
+		std::string line;
+		std::string data;
+		while (getline(file, line))
+		{
+			data.append(line);
+		}
+		wchar_t * buffer = StrLib::Utf8ToUnicode(data.c_str());
+		if (buffer) {
+			wdata = buffer;
+			delete[]buffer;
+			return true;
+		}
+	}
+	break;
+	case Unicode:
+	{
+		std::wifstream file(wfileName);
+		if (!file.is_open())return false;
+		std::wstring line;
+		while (getline(file,line))
+		{
+			wdata.append(line);
+		}
+		return true;
+	}
+	break;
+	default:
+		break;
+	}
+	return false;
 }
 
 bool FileParser::MsOfficeParser(const wchar_t *fileName, std::wstring &wdata)
@@ -135,7 +217,7 @@ bool FileParser::ParserPstFile(const wchar_t *wfileName, std::wstring &wdata, co
 {
 	std::wstring newFileName = tempDir;
 	newFileName += L"\\tmp.pst";
-	if (!CopyFileW(wfileName, newFileName.c_str(), FALSE))  //��ֹpst�ļ����ֳ�������·��
+	if (!CopyFileW(wfileName, newFileName.c_str(), FALSE))  //防止pst文件出现出现中文路径
 	{
 		return false;
 	}

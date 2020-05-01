@@ -6,7 +6,7 @@
 TGTip::TGTip(QWidget *parent /* = 0 */):ui(new Ui::TGTip)
 {
 	ui->setupUi(this);
-	setWindowFlags(Qt::SubWindow | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
+	setWindowFlags(Qt::SubWindow | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint |Qt::Tool);
 	setStyleSheet("border:1px groove rgb(10,10,10)");
 	ui->content_label->setAlignment(Qt::AlignLeft);
 	ui->content_label->setStyleSheet("border:0px;font-size:14px;");
@@ -39,9 +39,9 @@ TGTip::~TGTip()
 	delete ui;
 }
 
-void TGTip::AddStr(std::wstring str,int type)
+void TGTip::AddStr(int type, std::wstring wstr)
 {
-	QString qstr = QString::fromStdWString(str);
+	QString qstr = QString::fromStdWString(wstr);
 	emit SendMsg(qstr,type);
 }
 
@@ -66,11 +66,20 @@ void TGTip::ShowString(QString str,int type)
 	case HOOK_TYPE::HOOK_TYPE_RENAME_FILE:
 		line.append(QString::fromStdWString(L"你重命名了敏感文件: "));
 		break;
+	case HOOK_TYPE::HOOK_TYPE_PRINT_DATA:
+		line.append(QString::fromStdWString(L"你打印的文件含有敏感数据"));
+		break;
+	case HOOK_TYPE::HOOK_TYPE_COPY_DATA:
+		line.append(QString::fromStdWString(L"你复制的内容含有敏感数据"));
+		break;
 	default:
 		break;
 	}
 	tip_str.append(SetLineMargin(line));
-	tip_str.append(SetLineMargin(SetFileNameColor(str)));
+	if (str != "")
+	{
+		tip_str.append(SetLineMargin(SetFileNameColor(str)));
+	}
 	line.clear();
 	line.append(QString::fromStdWString(L"该行为将被记录至服务器"));
 	tip_str.append(SetLineMargin(line));

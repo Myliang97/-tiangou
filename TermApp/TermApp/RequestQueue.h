@@ -10,7 +10,10 @@ class RequestQueue
 {
 public:
 	bool Start();
+	//文件数据上报
 	void AddRequest(int type,LPWSTR wfileName,LPWSTR wprocessName,MatchRule *rule,LPWSTR wprameter = NULL,BOOL isSensitive = TRUE);
+	//数据块上报
+	void AddRequest(int type, MatchRule *rule, wchar_t *wdata);
 	void AddRequest(Request &req);
 	RequestQueue();
 	~RequestQueue();

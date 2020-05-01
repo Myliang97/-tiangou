@@ -6,29 +6,47 @@
 
 TGConfig*TGConfig::m_config = NULL;
 
-BOOL TGConfig::UpdateConfig(const char *xmlData/* NULL */)
+BOOL TGConfig::UpdateConfig()
 {
-	XmlReader reader;
-	if (xmlData)
+	SetEvent(m_updateConf);
+	BOOL ret = FALSE;
+	while (TRUE)
 	{
-		if (!reader.LoadXml(xmlData))
+		DWORD status = WaitForSingleObject(m_finish,60000);
+		if (status == WAIT_OBJECT_0)
 		{
-			TermApp::Instance()->GetLogger()->Trace(INFO_FORMAT, "load xml data error %d",GetLastError());
-			return FALSE;
+			ret = TRUE;
 		}
+		break;
 	}
-	else
+	ResetEvent(m_finish);
+	return ret;
+}
+
+DWORD WINAPI TGConfig::UpdateConfig(LPVOID lParameter)
+{
+	TGConfig * conf = (TGConfig *)lParameter;
+	while (TRUE)
 	{
-		TermApp *app = TermApp::Instance();
-		CHAR confPath[MAX_PATH];
-		sprintf(confPath, "%s\\%s",app->GetTermInfo()->m_tgDir.c_str(), TG_CONFIG_PATH);
-		if (!reader.LoadFile(confPath))
-		{
-			TermApp::Instance()->GetLogger()->Trace(INFO_FORMAT, "load xml file error %d",GetLastError());
-			return FALSE;
+		DWORD status = WaitForSingleObject(conf->m_updateConf, INFINITE);
+		if (status == WAIT_OBJECT_0) {
+			XmlReader reader;
+			TermApp *app = TermApp::Instance();
+			CHAR confPath[MAX_PATH];
+			sprintf(confPath, "%s\\%s", app->GetTermInfo()->m_tgDir.c_str(), TG_CONFIG_PATH);
+			if (!reader.LoadFile(confPath))
+			{
+				TermApp::Instance()->GetLogger()->Trace(INFO_FORMAT, "load xml file error %d", GetLastError());
+				return FALSE;
+			}
+			conf->LoadConf(reader);
+			ResetEvent(conf->m_updateConf);
+			SetEvent(conf->m_finish);
 		}
+		else
+			break;
 	}
-	return LoadConf(reader);
+	return 0;
 }
 
 BOOL TGConfig::LoadConf(XmlReader &reader)
@@ -171,6 +189,10 @@ TGConfig *TGConfig::Instance()
 TGConfig::TGConfig()
 {
 	m_configData = new ConfigData;
+	m_updateConf = CreateEventA(NULL, FALSE, FALSE, NULL);
+	m_finish = CreateEventA(NULL, FALSE, FALSE, NULL);
+	HANDLE hd = CreateThread(NULL, NULL, UpdateConfig, this, NULL, NULL);
+	CloseHandle(hd);
 }
 
 

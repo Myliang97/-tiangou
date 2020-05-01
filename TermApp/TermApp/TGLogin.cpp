@@ -89,7 +89,7 @@ bool TGLogin::ParserResponse(const char *xml)
 		{
 			m_isConnect = true;
 			m_log->Trace(INFO_FORMAT, "download config.xml success");
-			TermApp::Instance()->GetConfig()->UpdateConfig();
+			
 		}		
 	}
 	return true;
@@ -128,6 +128,7 @@ bool TGLogin::DownConf()
 	{
 		return false;
 	}
+	TermApp::Instance()->GetConfig()->UpdateConfig();
 	return true;
 }
 

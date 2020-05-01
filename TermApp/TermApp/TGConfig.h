@@ -60,13 +60,16 @@ class TGConfig
 {
 public:
 	static TGConfig *Instance();
-	BOOL UpdateConfig(const char *xmlData =NULL);
+	BOOL UpdateConfig();
 	ConfigData *GetConfigData() { return m_configData; }
 	TGConfig();
 	~TGConfig();
 private:
+	static DWORD WINAPI UpdateConfig(LPVOID);
 	BOOL LoadConf(XmlReader &reader);
 	static TGConfig *m_config;
 	ConfigData *m_configData;
+	HANDLE m_updateConf;
+	HANDLE m_finish;
 };
 

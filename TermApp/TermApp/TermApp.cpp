@@ -47,6 +47,7 @@ BOOL TermApp::Init()  //初始化TermApp
 	m_config = new TGConfig;
 	if (!m_config->UpdateConfig())
 	{
+		m_log->Trace(ERROR_FORMAT, "load conf error");
 		return FALSE;
 	}
 	//构建url
@@ -180,9 +181,9 @@ DWORD WINAPI TermApp::ListenTcpProc(LPVOID lParameter)
 		MatchRule rule;
 		if (IsSecretFileW(msg.wzlpFileName,rule))
 		{
+			app->m_tip->AddStr((int)msg.hookType,msg.wzlpFileName);
 			TermApp::Instance()->GetLogger()->TraceW(INFO_FORMAT, L"file:%s -- is Sensitived", msg.wzlpFileName);
 			app->m_reqQueProc->AddRequest(msg.hookType, msg.wzlpFileName, msg.processName,&rule,NULL,1);
-			app->m_tip->AddStr(msg.wzlpFileName,(int)msg.hookType);
 		}
 		TcpServer::WriteToSock(sock, &ret, sizeof(HOOK_MESSAGE_RET));
 		
@@ -193,8 +194,25 @@ DWORD WINAPI TermApp::ListenTcpProc(LPVOID lParameter)
 		MatchRule rule;
 		if (IsSecretFileW(msg.wzlparameter,rule))
 		{
+			app->m_tip->AddStr((int)msg.hookType, msg.wzlpFileName);
 			TermApp::Instance()->GetLogger()->TraceW(INFO_FORMAT, L"file:%s -- is Sensitived", msg.wzlpFileName);
 			app->m_reqQueProc->AddRequest(msg.hookType, msg.wzlpFileName, msg.processName,&rule, msg.wzlparameter,1);
+		}
+	}
+	else if (msg.hookType == HOOK_TYPE::HOOK_TYPE_COPY_DATA)
+	{
+		TcpServer::WriteToSock(sock, &ret, sizeof(HOOK_MESSAGE_RET));
+		if (buffer)
+		{
+			MatchRule rule;
+			BOOL isSensitive = FALSE;
+			CheckDataMatchRule(buffer, rule, isSensitive); 
+			if (isSensitive) {
+				app->m_tip->AddStr((int)msg.hookType);
+				app->m_reqQueProc->AddRequest(msg.hookType, &rule, buffer);
+			}
+			delete[]buffer;
+			buffer = NULL;
 		}
 	}
 	else if (msg.hookType == HOOK_TYPE::HOOK_TYPE_PRINT_DATA) //敏感数据打印

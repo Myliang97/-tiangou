@@ -20,6 +20,7 @@ private:
 	BOOL GetMacAddress(char *pMacAdd, DWORD dwSize);
 	BOOL GetCPUID(char *szCPUID, DWORD size);
 	std::string GuidToString(const GUID &guid);
+	std::string GetOsVersion();
 public:
 	BOOL Init();
 	TermInfo();

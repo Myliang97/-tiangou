@@ -61,6 +61,26 @@ void RequestQueue::AddRequest(int type, LPWSTR wfileName, LPWSTR wprocessName, M
 	m_queLock.unlock();
 }
 
+void RequestQueue::AddRequest(int type, MatchRule *rule, wchar_t *wdata)
+{
+	Request req;
+	req.mInfo.mCmdId = 2;
+	wchar_t *wverifyId = StrLib::Utf8ToUnicode(TermApp::Instance()->GetTermInfo()->m_verifyId.c_str());
+	if (wverifyId)
+	{
+		req.mInfo.mVerifyId = wverifyId;
+		delete[]wverifyId;
+	}
+	req.mContent.mType = type;
+	req.mContent.mMatchRule = rule->GetMatchRuleName();
+	req.mContent.mMatchInfo = rule->GetMatchInfo();
+	req.mContent.mData = wdata;
+	req.mContent.mCurTime = CDateTime::GetLocalTimeW();
+	m_queLock.lock();
+	m_reqQueue.push(req);
+	m_queLock.unlock();
+}
+
 void RequestQueue::AddRequest(Request &req)
 {
 	m_queLock.lock();
@@ -99,8 +119,6 @@ DWORD WINAPI RequestQueue::SendRequestProc(LPVOID lParamter)  //上报数据线程
 			Request req = cacheQue.front();
 			if (RequestToXmL::RequestToXmlA(req, strxml))
 			{
-				//std::ofstream file("C:\\Users\\Liang\\Desktop\\Release\\test.xml",ios::app);
-				//file.write(strxml.c_str(), strxml.length());
 				if (!client.SendData(strxml.c_str(), strxml.length()))
 				{
 					TermApp::Instance()->GetLogger()->Trace(ERROR_FORMAT, "send data fail");

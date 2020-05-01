@@ -166,6 +166,24 @@ BOOL TermInfo::GetOsVersion(char *osName,DWORD dwsize)
 	return osName[0] != '\0';
 }
  
+std::string TermInfo::GetOsVersion()
+{
+	CHAR productName[MAX_PATH];
+	if (!ReadRegVal(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", "ProductName", (LPBYTE)&productName, sizeof(productName)))
+	{
+		return "";
+	}
+	CHAR releaseId[MAX_PATH];
+	if (!ReadRegVal(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", "ReleaseId", (LPBYTE)&releaseId, sizeof(releaseId)))
+	{
+		return productName;
+	}
+	std::string osName = productName;
+	osName.append(" ");
+	osName.append(releaseId);
+	return osName;
+}
+
 #define  MAC_REG_PATH  "SYSTEM\\CurrentControlSet\\Control\\Network\\{4D36E972-E325-11CE-BFC1-08002BE10318}\\%s\\Connection"
 BOOL TermInfo::GetMacAddress(char *pMacAdd, DWORD dwSize)
 {
@@ -279,13 +297,13 @@ BOOL TermInfo::Init()
 	}
 	m_mac = mac;
 	//获得客户端的os
-	CHAR os[MAX_PATH];
+	/*CHAR os[MAX_PATH];
 	if (!GetOsVersion(os, MAX_PATH))
 	{
 		TGDebug::debug(DEBUG_STRING, "GetOsVersion error%d", GetLastError());
 		return FALSE;
-	}
-	m_os = os;
+	}*/
+	m_os = GetOsVersion();
 	CHAR verid[33];
 	if (!ReadRegVal(HKEY_CURRENT_USER, TG_REG_ROOT_PATH, TG_REG_VERIFY_ID, (LPBYTE)verid, sizeof(verid)))
 	{
@@ -296,14 +314,7 @@ BOOL TermInfo::Init()
 			TGDebug::debug(DEBUG_STRING, "GetCPUID error%d", GetLastError());
 			return FALSE;
 		}
-		GUID guid;
-		HRESULT h = CoCreateGuid(&guid);
-		if (h != S_OK) {
-			TGDebug::debug(DEBUG_STRING, "GetGUID error%d", GetLastError());
-			return FALSE;
-		}
-		std::string key = GuidToString(guid);
-		hmac_md5(cpuId,(char*)key.c_str(),verid);
+		hmac_md5(cpuId,mac,verid);
 		WriteReg(HKEY_CURRENT_USER, TG_REG_ROOT_PATH, TG_REG_VERIFY_ID, (LPBYTE)verid, sizeof(verid),REG_SZ);
 	}
 	m_verifyId = verid;
